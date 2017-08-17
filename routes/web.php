@@ -18,8 +18,8 @@ Route::get('home', array('as' => 'home', 'uses' => function(){
   return view('home');
 }));
 
-Route::get('auth/twitter', 'TwitterController@redirectToProvider');
-Route::get('auth/twitter/callback', 'TwitterController@handleProviderCallback');
+Route::get('/auth/twitter', 'TwitterController@redirectToProvider');
+Route::get('/auth/twitter/callback', 'TwitterController@handleProviderCallback');
 Route::get('/twitter/{screen_name}', 'TwitterController@getFollowersTweets');
 Route::get('/home', 'TwitterController@tweetsAndfollowers');
 Route::post('/generate_pdf', 'TwitterController@generatePDF');
