@@ -14,11 +14,11 @@ function slideshowcall(){
   var container = $('#slides ul');
   var elm = container.find(':first-child').prop("tagName");
   var item_width = cont;
-    var previous = 'prev'; //id of previous button
-    var next = 'next'; //id of next button
-    slides.width(item_width); //set the slides to the correct pixel width
+    var previous = 'prev'; 
+    var next = 'next'; 
+    slides.width(item_width); 
     container.parent().width(item_width);
-    container.width((slides.length) * item_width); //set the slides container to the correct total width
+    container.width((slides.length) * item_width); 
     container.find(elm + ':first').before(container.find(elm + ':last'));
     resetSlides();
     

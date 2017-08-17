@@ -31,23 +31,27 @@ html, body {
 }
 
 a#prev:hover, a#next:hover {
-  color: #FFF;
+  color: black;
   text-shadow: .5px 0px #b14943;
+}
+
+#download {
+  margin-left: 80rem; 
 }
 
 /*slides styling*/
 #carousel {
   position: relative;
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
-  border-radius: 1px;
+  border-color: blue;
 }
 
 #slides {
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
 }
 
 #slides ul {
@@ -70,10 +74,12 @@ a#prev:hover, a#next:hover {
 }
 
 #tweets {
-  margin-left: 0.1rem;
+  margin-left: 20rem;
   margin-right: 0.1rem;
   border: 1px solid;
+  width: 70%;
   box-shadow: 10px 15px 4px #ddd;
+  color : blue;
 }
 
 label:hover { 

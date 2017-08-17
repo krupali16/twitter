@@ -21,7 +21,9 @@ Route::get('home', array('as' => 'home', 'uses' => function(){
 Route::get('/auth/twitter', 'TwitterController@redirectToProvider');
 Route::get('/auth/twitter/callback', 'TwitterController@handleProviderCallback');
 Route::get('/twitter/{screen_name}', 'TwitterController@getFollowersTweets');
-Route::get('/home', 'TwitterController@tweetsAndfollowers');
+Route::get('/home', 'TwitterController@getTweetsAndFollowers');
 Route::post('/generate_pdf', 'TwitterController@generatePDF');
 Route::get('/send', 'TwitterController@sendMail');
 Route::get('/mail', 'TwitterController@mail');
+Route::get('/download', 'TwitterController@downloadTweets');
+Route::get('/logout', 'TwitterController@logout');

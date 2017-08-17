@@ -15,21 +15,17 @@
   $token = (session('access_token'));
   ?>
   <div class="container">
-
-    <!-- navbar starts -->
-    <nav class="navbar navbar-default">
+    
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Welcome {{$token['screen_name']}}</a>
+          <a class="navbar-brand" href="/">Hello {{$token['screen_name']}}</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login/twitter/logout">Logout</a></li>
+          <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
-    </nav>
-    <!-- navbar ends -->
 
-    
+    <a href="/download" id="download" class="btn btn-primary btn-sm">Download Tweets</a>
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Email Tweets</button>
 
     <!-- Modal starts-->
@@ -43,7 +39,7 @@
             <h4 class="modal-title">Email Tweets</h4>
           </div>
           <div class="modal-body">
-            <form method="POST" action="/generate_pdf">
+            <form method="POST" action="/send">
               {{csrf_field()}}
               <div class="form-group">
                 <label for="email">Email Address</label>
@@ -103,7 +99,7 @@
           </div>
           <div class="media-body">
             <label data="{{$value['screen_name']}}"><h4 class="media-heading">{{$value['name']}}</h4></label>
-            <p>{{$value['screen_name']}}</p>
+            
           </div>
         </div>
       </div>
@@ -134,6 +130,8 @@
         }
       })
     })
+
+   
 
     // var list = new Array();
 
