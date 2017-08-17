@@ -23,5 +23,5 @@ Route::get('/auth/twitter/callback', 'TwitterController@handleProviderCallback')
 Route::get('/twitter/{screen_name}', 'TwitterController@getFollowersTweets');
 Route::get('/home', 'TwitterController@tweetsAndfollowers');
 Route::post('/generate_pdf', 'TwitterController@generatePDF');
-Route::get('/send_mail', 'TwitterController@sendMail');
+Route::get('/send', 'TwitterController@sendMail');
 Route::get('/mail', 'TwitterController@mail');

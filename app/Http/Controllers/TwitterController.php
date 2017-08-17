@@ -175,12 +175,13 @@ class TwitterController extends Controller
 	}
 
 	public function sendMail($tweets, $file){
-		Mail::send('mail', $tweets, function($data) use($file){
-			$data->to('krupalipanchal1995@gmail.com');
-			$data->from('krupalipanchal1995@gmail.com','Krupali Panchal');
-			$data->attachData($file->output(), "tweets.pdf");
-		});
-		return;
+		// Mail::send('mail', $tweets, function($data) use($file){
+		// 	$data->to('krupalipanchal1995@gmail.com');
+		// 	$data->from('krupalipanchal1995@gmail.com','Krupali Panchal');
+		// 	$data->attachData($file->output(), "tweets.pdf");
+		// });
+		// return;
+		Mail::send(new SendMail());
 	}
 	public function mail()
 	{
