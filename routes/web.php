@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,3 +20,8 @@ Route::get('home', array('as' => 'home', 'uses' => function(){
 
 Route::get('auth/twitter', 'TwitterController@redirectToProvider');
 Route::get('auth/twitter/callback', 'TwitterController@handleProviderCallback');
+Route::get('/twitter/{screen_name}', 'TwitterController@getFollowersTweets');
+Route::get('/home', 'TwitterController@tweetsAndfollowers');
+Route::post('/generate_pdf', 'TwitterController@generatePDF');
+Route::get('/send_mail', 'TwitterController@sendMail');
+Route::get('/mail', 'TwitterController@mail');

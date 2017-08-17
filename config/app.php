@@ -178,7 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Thujohn\Twitter\TwitterServiceProvider::class
+        Thujohn\Twitter\TwitterServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Bogardo\Mailgun\MailgunServiceProvider::class
 
     ],
 
@@ -230,6 +232,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Mailgun' => Bogardo\Mailgun\Facades\Mailgun::class,
+
 
     ],
 
