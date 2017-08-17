@@ -69,7 +69,7 @@
             <div class = "content">
                 <div class = "title">My Twitter App</div>
 
-                <a class = "btn btn-info" href = "auth/twitter"> Login with Twitter</a>
+                <a class = "btn btn-info" href = "/auth/twitter"> Login with Twitter</a>
             </div>
         </div>
     </body>
