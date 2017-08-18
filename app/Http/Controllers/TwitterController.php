@@ -107,30 +107,36 @@ class TwitterController extends Controller
 		return $arr;
 	}
 
-	// public function generatePDF(){
-	// 		$credentials = Twitter::getCredentials();
-	// 		$screen_name = $credentials->screen_name;
-	// 		$count = $credentials->statuses_count;
-	// 		$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => $count, 'format' => 'array']);
-	// 		$file = PDF::loadView('file', compact('tweets'));
-	// 		$this->sendMail($tweets, $file);
-	// }
+	public function generatePDF(){
+			$credentials = Twitter::getCredentials();
+			$screen_name = $credentials->screen_name;
+			$count = $credentials->statuses_count;
+			$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => $count, 'format' => 'array']);
+			$file = PDF::loadView('file', compact('tweets'));
+			$this->sendMail($tweets, $file);
+	}
 
-	// public function sendMail($tweets, $file){
-	// 	Mail::send('mail', $tweets, function($data) use($file){
-	// 		$data->to('krupalipanchal1995@gmail.com');
-	// 		$data->from('krupalipanchal1995@gmail.com','Krupali Panchal');
-	// 		$data->attachData($file->output(), "tweets.pdf");
-	// 	});
-	// 	return;
-	// }
+	public function sendMail($tweets, $file){
+		Mail::send('mail', $tweets, function($data) use($file){
+			$data->to('krupalipanchal1995@gmail.com');
+			$data->from('krupalipanchal1995@gmail.com','Krupali Panchal');
+			$data->attachData($file->output(), "tweets.pdf");
+		});
+		return;
+	}
 
-	// public function mail()
-	// {
-	// 	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message) {
-	// 	$message->to('krupalipanchal1995@gmail.com');
-	// });
-	// }
+	public function mail()
+	{
+		Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message) {
+		$message->to('krupalipanchal1995@gmail.com');
+	});
+	}
+
+	public function searchUsers($data)
+	{
+		$users = Twitter::getUsersSearch(['q' => $data]);
+		return $users;
+	}
 
 	public function downloadTweets()
 	{
@@ -138,6 +144,13 @@ class TwitterController extends Controller
 		$screen_name = $credentials->screen_name;
 		$count = $credentials->statuses_count;
 		$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => $count, 'format' => 'array']);
+		$file = PDF::loadView('file', compact('tweets'));
+		return $file->download('tweets.pdf');
+	}
+
+	public function downloadUserTweets($user)
+	{
+		$tweets = Twitter::getUserTimeline(['screen_name' => $user, 'count' => 300, 'format' => 'array']);
 		$file = PDF::loadView('file', compact('tweets'));
 		return $file->download('tweets.pdf');
 	}

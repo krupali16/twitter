@@ -14,6 +14,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
+
 Route::get('home', array('as' => 'home', 'uses' => function(){
   return view('home');
 }));
@@ -26,4 +30,6 @@ Route::post('/generate_pdf', 'TwitterController@generatePDF');
 Route::get('/send', 'TwitterController@sendMail');
 Route::get('/mail', 'TwitterController@mail');
 Route::get('/download', 'TwitterController@downloadTweets');
+Route::get('/download_user_tweets/{user}', 'TwitterController@downloadUserTweets');
+Route::get('/search_users/{data}', 'TwitterController@searchUsers');
 Route::get('/logout', 'TwitterController@logout');

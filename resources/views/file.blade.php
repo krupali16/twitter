@@ -9,14 +9,16 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+  <center><h1>Tweets</h1></center>
   <?php
   $token = (session('access_token'));
   ?>
   <div class="container">
-      @foreach($tweets as $key => $value)
-       <p>{{$value['text']}}</p>
+    <ol>
+      @foreach($tweets as $key => $value)      
+       <li>{{$value['text']}}</li>
       @endforeach
-
+    </ol>
   </div>
 </body>
 </html>

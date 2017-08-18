@@ -24,7 +24,8 @@
           <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
-
+    
+    <a href="/search" class="btn btn-primary btn-sm">Search Users</a>    
     <a href="/download" id="download" class="btn btn-primary btn-sm">Download Tweets</a>
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Email Tweets</button>
 
