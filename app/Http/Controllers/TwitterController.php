@@ -12,6 +12,7 @@ use PDF;
 use Redirect;
 use SendMail;
 use Illuminate\Support\Facades\Request;
+
 //use Illuminate\Http\Request;
 
 class TwitterController extends Controller
@@ -114,24 +115,19 @@ class TwitterController extends Controller
 			$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => $count, 'format' => 'array']);
 			$file = PDF::loadView('file', compact('tweets'));
 			$this->sendMail($tweets, $file);
+			return back();
 	}
 
 	public function sendMail($tweets, $file){
 		Mail::send('mail', $tweets, function($data) use($file){
-			$data->to('krupalipanchal1995@gmail.com');
-			$data->from('krupalipanchal1995@gmail.com','Krupali Panchal');
+			$data->to(request('email'));
+			$data->from('krupalipanchal016@gmail.com','Krupali Panchal');
 			$data->attachData($file->output(), "tweets.pdf");
 		});
-		return;
+		
 	}
 
-	public function mail()
-	{
-		Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message) {
-		$message->to('krupalipanchal1995@gmail.com');
-	});
-	}
-
+	
 	public function searchUsers($data)
 	{
 		$users = Twitter::getUsersSearch(['q' => $data]);
@@ -158,5 +154,12 @@ class TwitterController extends Controller
 	public function logout() {
 		Session::flush();
 		return view('welcome');
+	}
+
+	public function demo()
+	{
+		Mail::send('mail', ['as'=>''], function ($message) {
+    	$message->to('ranadesankalp@gmail.com', 'John Smith')->subject('Welcome!');
+});
 	}
 }

@@ -40,7 +40,7 @@
             <h4 class="modal-title">Email Tweets</h4>
           </div>
           <div class="modal-body">
-            <form method="POST" action="/send">
+            <form method="POST" action="/generate_pdf">
               {{csrf_field()}}
               <div class="form-group">
                 <label for="email">Email Address</label>

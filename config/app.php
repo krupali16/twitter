@@ -180,8 +180,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Bogardo\Mailgun\MailgunServiceProvider::class
-
+        Bogardo\Mailgun\MailgunServiceProvider::class,
     ],
 
     /*
@@ -234,8 +233,8 @@ return [
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Mailgun' => Bogardo\Mailgun\Facades\Mailgun::class,
-
-
+        'Input' => Illuminate\Support\Facades\Input::class,
+        
     ],
 
 ];
