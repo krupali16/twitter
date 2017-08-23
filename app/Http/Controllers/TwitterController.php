@@ -162,10 +162,10 @@ class TwitterController extends Controller
 		$credentials = Twitter::getCredentials();
 		$screen_name = $credentials->screen_name;
 		$count = $credentials->statuses_count;
-		$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'count' => 200, 'format' => 'array']);
+		$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => 200, 'format' => 'array']);
 		$t[0] = $tweets;
 		for($i = 1; $i <= 15; $i++){
-			$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'max_id' => bcsub($t[$i - 1][199]['id_str'], "1"), 'count' => 200, 'format' => 'array']);
+			$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'max_id' => bcsub($t[$i - 1][199]['id_str'], "1"), 'count' => 200, 'format' => 'array']);
 			if(count($tweets) == 0)
 				break;
 			$t[$i] = $tweets;
@@ -176,8 +176,15 @@ class TwitterController extends Controller
 
 	public function downloadUserTweets($user)
 	{
-		$tweets = Twitter::getUserTimeline(['screen_name' => $user, 'count' => 300, 'format' => 'array']);
-		$file = PDF::loadView('file', compact('tweets'));
+		$tweets = Twitter::getUserTimeline(['screen_name' => $user, 'count' => 200, 'format' => 'array']);
+		$t[0] = $tweets;
+		for($i = 1; $i <= 15; $i++){
+			$tweets = Twitter::getUserTimeline(['screen_name' => $user, 'max_id' => bcsub($t[$i - 1][199]['id_str'], "1"), 'count' => 200, 'format' => 'array']);
+			if(count($tweets) == 0)
+				break;
+			$t[$i] = $tweets;
+		}
+		$file = PDF::loadView('file', compact('t'));
 		return $file->download('tweets.pdf');
 	}
 

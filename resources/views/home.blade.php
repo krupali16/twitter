@@ -126,7 +126,6 @@
             console.log(result[i]);
             var li=document.createElement('li');
             li.className="slide";
-            // li.style.width="593.984px";
             var div=document.createElement('div');
             div.className="quoteContainer";
             div.innerHTML=result[i];
@@ -137,23 +136,6 @@
         }
       })
     })
-
-   
-
-    // var list = new Array();
-
-    //  $("#tags").click(function() {
-
-
-    //      list = <?php json_encode($followers['users']); ?>
-          
-    //         $( "#tags" ).autocomplete({
-    //           source: list
-    //         });
-    //         console.log(list);
-    //  });
-
-  
 
   </script>
 </body>
