@@ -15,8 +15,10 @@
   ?>
   <div class="container">
     <ol>
-      @foreach($tweets as $key => $value)      
-       <li>{{$value['text']}}</li>
+      @foreach($t as $tweets)
+        @foreach($tweets as $tweet)
+          <li> {{ $tweet['text'] }}</li>
+        @endforeach
       @endforeach
     </ol>
   </div>

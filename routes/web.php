@@ -34,4 +34,4 @@ Route::get('/download_user_tweets/{user}', 'TwitterController@downloadUserTweets
 Route::get('/search_users/{data}', 'TwitterController@searchUsers');
 Route::get('/logout', 'TwitterController@logout');
 
-Route::get('/mailme','TwitterController@demo');
+Route::get('/mailme','TwitterController@fetchTimeLine');

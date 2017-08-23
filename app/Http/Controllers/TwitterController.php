@@ -13,6 +13,9 @@ use Redirect;
 use SendMail;
 use Illuminate\Support\Facades\Request;
 
+ini_set('max_execution_time', 0);
+ini_set('memory_limit', '2048M');
+
 //use Illuminate\Http\Request;
 
 class TwitterController extends Controller
@@ -134,13 +137,57 @@ class TwitterController extends Controller
 		return $users;
 	}
 
+	public function fetchTimeLine()
+	{
+		$tweets = array();
+		$count = 0;
+		$response = true;
+		while ($response != false && $count != 80) {
+		$tweet = Twitter::getUserTimeline(['screen_name'=>'narendramodi', 'format'=>'array','count'=>300]);
+		if(empty($tweet)) {
+			$response = false;
+		}
+		else {
+		foreach ($tweet as $t) {
+			array_push($tweets,$t['text']);
+			}
+		}
+			$count++;
+		}
+		return sizeof($tweets);
+	}
+
 	public function downloadTweets()
 	{
 		$credentials = Twitter::getCredentials();
 		$screen_name = $credentials->screen_name;
+
+		/*$tweets = array();
+		$count = 0;
+		$response = true;
+		while ($response != false && $count != 15) {
+			$tweet = Twitter::getUserTimeline(['screen_name'=>'narendramodi', 'format'=>'array','count'=>200]);
+			if(empty($tweet)) {
+				$response = false;
+			}
+			else {
+			foreach ($tweet as $t) {
+				array_push($tweets,$t['text']);
+				}
+			}
+				$count++;1
+		}*/
+		//return sizeof($tweets);
 		$count = $credentials->statuses_count;
-		$tweets = Twitter::getUserTimeline(['screen_name' => $screen_name, 'count' => $count, 'format' => 'array']);
-		$file = PDF::loadView('file', compact('tweets'));
+		$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'count' => 200, 'format' => 'array']);
+		$t[0] = $tweets;
+		for($i = 1; $i <= 5; $i++){			
+			$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'max_id' => $t[$i - 1][199]['id_str'], 'count' => 200, 'format' => 'array']);
+			if(count($tweets) == 0)
+				break;
+			$t[$i] = $tweets;
+		}
+		$file = PDF::loadView('file', compact('t'));
 		return $file->download('tweets.pdf');
 	}
 
@@ -156,10 +203,4 @@ class TwitterController extends Controller
 		return view('welcome');
 	}
 
-	public function demo()
-	{
-		Mail::send('mail', ['as'=>''], function ($message) {
-    	$message->to('ranadesankalp@gmail.com', 'John Smith')->subject('Welcome!');
-});
-	}
 }
