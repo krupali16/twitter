@@ -161,28 +161,11 @@ class TwitterController extends Controller
 	{
 		$credentials = Twitter::getCredentials();
 		$screen_name = $credentials->screen_name;
-
-		/*$tweets = array();
-		$count = 0;
-		$response = true;
-		while ($response != false && $count != 15) {
-			$tweet = Twitter::getUserTimeline(['screen_name'=>'narendramodi', 'format'=>'array','count'=>200]);
-			if(empty($tweet)) {
-				$response = false;
-			}
-			else {
-			foreach ($tweet as $t) {
-				array_push($tweets,$t['text']);
-				}
-			}
-				$count++;1
-		}*/
-		//return sizeof($tweets);
 		$count = $credentials->statuses_count;
 		$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'count' => 200, 'format' => 'array']);
 		$t[0] = $tweets;
-		for($i = 1; $i <= 5; $i++){			
-			$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'max_id' => $t[$i - 1][199]['id_str'], 'count' => 200, 'format' => 'array']);
+		for($i = 1; $i <= 15; $i++){
+			$tweets = Twitter::getUserTimeline(['screen_name' => 'NASA', 'max_id' => bcsub($t[$i - 1][199]['id_str'], "1"), 'count' => 200, 'format' => 'array']);
 			if(count($tweets) == 0)
 				break;
 			$t[$i] = $tweets;
